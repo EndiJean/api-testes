@@ -3,6 +3,7 @@ package com.endijean.apitestes.services.impl;
 import com.endijean.apitestes.domain.User;
 import com.endijean.apitestes.domain.dto.UserDTO;
 import com.endijean.apitestes.repositories.UserRepository;
+import com.endijean.apitestes.services.exceptions.ObjectNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,10 +49,6 @@ class UserServiceImplTest {
     }
 
     @Test
-    void findById() {
-    }
-
-    @Test
     void whenFindByIdThenReturnAnUserInstance() {
         when(repository.findById(anyInt())).thenReturn(optionalUser);
 
@@ -62,7 +59,22 @@ class UserServiceImplTest {
         assertEquals(ID, response.getId());
         assertEquals(NAME, response.getName());
         assertEquals(EMAIL, response.getEmail());
+    }
 
+    @Test
+    void whenFindByIdThenReturnAnObjectNotFoundException() {
+        when(repository.findById(anyInt())).thenThrow(new ObjectNotFoundException("Objeto não encontrado!"));
+
+        try{
+            service.findById(ID);
+        } catch (Exception ex) {
+            assertEquals(ObjectNotFoundException.class, ex.getClass());
+            assertEquals("Objeto não encontrado!", ex.getMessage());
+        }
+    }
+
+    @Test
+    void findAll() {
     }
 
     @Test
