@@ -4,7 +4,7 @@ import com.endijean.apitestes.domain.User;
 import com.endijean.apitestes.domain.dto.UserDTO;
 import com.endijean.apitestes.repositories.UserRepository;
 import com.endijean.apitestes.services.UserService;
-import com.endijean.apitestes.services.exceptions.DataIntegratyViiolationException;
+import com.endijean.apitestes.services.exceptions.DataIntegratyViolationException;
 import com.endijean.apitestes.services.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     private void findByEmail(UserDTO obj) {
         Optional<User> user = userRepository.findByEmail(obj.getEmail());
         if(user.isPresent() && !user.get().getId().equals(obj.getId())) {
-            throw new DataIntegratyViiolationException("E-mail já cadastrado no sistema");
+            throw new DataIntegratyViolationException("E-mail já cadastrado no sistema");
         }
     }
 

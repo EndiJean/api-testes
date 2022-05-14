@@ -3,14 +3,12 @@ package com.endijean.apitestes.services.impl;
 import com.endijean.apitestes.domain.User;
 import com.endijean.apitestes.domain.dto.UserDTO;
 import com.endijean.apitestes.repositories.UserRepository;
-import com.endijean.apitestes.services.exceptions.DataIntegratyViiolationException;
+import com.endijean.apitestes.services.exceptions.DataIntegratyViolationException;
 import com.endijean.apitestes.services.exceptions.ObjectNotFoundException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -112,7 +110,7 @@ class UserServiceImplTest {
             optionalUser.get().setId(2);
             service.create(userDTO);
         } catch (Exception ex) {
-            assertEquals(DataIntegratyViiolationException.class, ex.getClass());
+            assertEquals(DataIntegratyViolationException.class, ex.getClass());
             assertEquals("E-mail já cadastrado no sistema", ex.getMessage());
         }
 
@@ -139,7 +137,7 @@ class UserServiceImplTest {
             optionalUser.get().setId(2);
             service.create(userDTO);
         } catch (Exception ex) {
-            assertEquals(DataIntegratyViiolationException.class, ex.getClass());
+            assertEquals(DataIntegratyViolationException.class, ex.getClass());
             assertEquals("E-mail já cadastrado no sistema", ex.getMessage());
         }
 
